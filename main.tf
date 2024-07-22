@@ -28,7 +28,7 @@ resource "aws_db_instance" "paciente" {
   publicly_accessible = true
   skip_final_snapshot = true
 
-  vpc_security_group_ids = [aws_security_group.selected.id]
+  vpc_security_group_ids = [data.aws_security_group.selected.id]
 
   #db_name = "paciente"
 
