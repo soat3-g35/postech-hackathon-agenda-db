@@ -31,18 +31,18 @@ data "aws_security_group" "sg" {
   }
 }
 
-resource "aws_db_subnet_group" "pedido" {
-  name       = "pedido"
+resource "aws_db_subnet_group" "paciente" {
+  name       = "paciente"
   subnet_ids = data.aws_subnet_ids.example.ids
 
   tags = {
-    Name = "Pedido"
+    Name = "Paciente"
   }
 }
 
-resource "aws_db_instance" "pedido" {
-  identifier             = "pedido"
-  name                   = "pedido"
+resource "aws_db_instance" "paciente" {
+  identifier             = "paciente"
+  name                   = "paciente"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
@@ -51,9 +51,9 @@ resource "aws_db_instance" "pedido" {
   password               = "postgres"
   publicly_accessible    = true
   skip_final_snapshot    = true
-  db_subnet_group_name   = aws_db_subnet_group.pedido.name
+  db_subnet_group_name   = aws_db_subnet_group.paciente.name
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   tags = {
-    Name = "PedidoPostgresDB"
+    Name = "PacientePostgresDB"
   }
 }
