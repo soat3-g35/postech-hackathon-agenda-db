@@ -17,6 +17,13 @@ data "aws_security_group" "selected" {
   }
 }
 
+data "aws_db_subnet_group" "selected" {
+  filter {
+    name   = "tag:Name"
+    values = ["postech-vpc"]
+  }
+}
+
 resource "aws_db_instance" "paciente" {
   identifier          = "paciente"
   instance_class      = "db.t3.micro"
@@ -30,7 +37,6 @@ resource "aws_db_instance" "paciente" {
 
   vpc_security_group_ids = [data.aws_security_group.selected.id]
   db_subnet_group_name   = data.aws_db_subnet_group.selected.name
-
   tags = {
     Name = "PacientePostgresDB"
   }
