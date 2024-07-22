@@ -34,7 +34,8 @@ resource "aws_db_instance" "paciente" {
   password               = "postgres"
   publicly_accessible    = true
   skip_final_snapshot    = true
+
   tags = {
-    Name = "pacientePostgresDB"
+    Name = "PacientePostgresDB"
   }
 }
