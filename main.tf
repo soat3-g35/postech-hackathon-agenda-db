@@ -24,16 +24,16 @@ output "subnet_cidr_blocks" {
 }
 
 resource "aws_db_instance" "paciente" {
-  identifier             = "paciente"
-  name                   = "paciente"
-  instance_class         = "db.t3.micro"
-  allocated_storage      = 5
-  engine                 = "postgres"
-  engine_version         = "14.11"
-  username               = "postgres"
-  password               = "postgres"
-  publicly_accessible    = true
-  skip_final_snapshot    = true
+  identifier          = "paciente"
+  name                = "paciente"
+  instance_class      = "db.t3.micro"
+  allocated_storage   = 5
+  engine              = "postgres"
+  engine_version      = "14.11"
+  username            = "postgres"
+  password            = "postgres"
+  publicly_accessible = true
+  skip_final_snapshot = true
 
   tags = {
     Name = "PacientePostgresDB"
