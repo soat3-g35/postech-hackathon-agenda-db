@@ -10,6 +10,10 @@ data "aws_vpc" "selected" {
   }
 }
 
+data "aws_subnet_ids" "example" {
+  vpc_id = data.aws_vpc.selected.id
+}
+
 data "aws_security_group" "selected" {
   filter {
     name   = "tag:Name"
@@ -17,10 +21,12 @@ data "aws_security_group" "selected" {
   }
 }
 
-data "aws_db_subnet_group" "selected" {
-  filter {
-    name   = "tag:Name"
-    values = ["postech-vpc"]
+resource "aws_db_subnet_group" "paciente" {
+  name       = "paciente"
+  subnet_ids = data.aws_subnet_ids.example.ids
+
+  tags = {
+    Name = "postech-vpc"
   }
 }
 
@@ -36,7 +42,7 @@ resource "aws_db_instance" "paciente" {
   skip_final_snapshot = true
 
   vpc_security_group_ids = [data.aws_security_group.selected.id]
-  db_subnet_group_name   = data.aws_db_subnet_group.selected.name
+  db_subnet_group_name   = aws_db_subnet_group.paciente.name
   tags = {
     Name = "PacientePostgresDB"
   }
