@@ -33,17 +33,17 @@ resource "aws_db_subnet_group" "paciente" {
 }
 
 resource "aws_db_instance" "paciente" {
-  identifier             = "paciente"
-  instance_class         = "db.t3.micro"
-  allocated_storage      = 5
-  name                   = "paciente"
-  engine                 = "postgres"
-  engine_version         = "14.11"
-  username               = "postgres"
-  password               = "postgres"
-  publicly_accessible    = true
-  skip_final_snapshot    = true
-  db_subnet_group_name   = aws_db_subnet_group.paciente.name
+  identifier           = "paciente"
+  instance_class       = "db.t3.micro"
+  allocated_storage    = 5
+  name                 = "paciente"
+  engine               = "postgres"
+  engine_version       = "14.11"
+  username             = "postgres"
+  password             = "postgres"
+  publicly_accessible  = true
+  skip_final_snapshot  = true
+  db_subnet_group_name = aws_db_subnet_group.paciente.name
 
   tags = {
     Name = "PacientePostgresDB"
