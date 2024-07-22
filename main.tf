@@ -10,21 +10,10 @@ data "aws_vpc" "selected" {
   }
 }
 
-data "aws_subnet" "selected" {
+resource "aws_security_group" "selected" {
   filter {
-    name   = "tag:kubernetes.io/cluster/education-eks-cluster"
-    values = ["shared"]
-  }
-}
-
-resource "aws_security_group" "instance" {
-  name   = "postgres-security-group"
-  vpc_id = data.aws_vpc.selected.id
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    name   = "tag:Name"
+    values = ["postech-vpc"]
   }
 }
 
@@ -39,8 +28,7 @@ resource "aws_db_instance" "paciente" {
   publicly_accessible = true
   skip_final_snapshot = true
 
-  vpc_security_group_ids = [aws_security_group.instance.id]
-  # subnet_id              = data.aws_subnet.selected.id
+  vpc_security_group_ids = [aws_security_group.selected.id]
 
   #db_name = "paciente"
 
