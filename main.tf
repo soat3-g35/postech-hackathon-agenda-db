@@ -10,7 +10,7 @@ data "aws_vpc" "selected" {
   }
 }
 
-resource "aws_security_group" "selected" {
+data "aws_security_group" "selected" {
   filter {
     name   = "tag:Name"
     values = ["postech-vpc"]
