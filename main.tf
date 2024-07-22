@@ -23,17 +23,6 @@ output "subnet_cidr_blocks" {
   value = [for s in data.aws_subnet.example : s.cidr_block]
 }
 
-resource "aws_security_group" "instance" {
-  name   = "postgres-security-group"
-  vpc_id = data.aws_vpc.selected.id
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_db_subnet_group" "paciente" {
   name       = "paciente"
   subnet_ids = data.aws_subnet_ids.example.ids
