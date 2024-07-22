@@ -29,6 +29,7 @@ resource "aws_db_instance" "paciente" {
   skip_final_snapshot = true
 
   vpc_security_group_ids = [data.aws_security_group.selected.id]
+  subnet_id              = data.aws_subnet.selected.id
 
   #db_name = "paciente"
 
