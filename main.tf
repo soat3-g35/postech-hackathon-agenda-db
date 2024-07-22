@@ -6,7 +6,7 @@ provider "aws" {
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"
-    values = ["postech-vpc"]
+    values = ["g35-vpc"]
   }
 }
 
@@ -24,9 +24,13 @@ output "subnet_cidr_blocks" {
 }
 
 resource "aws_security_group" "instance" {
-  filter {
-    name   = "tag:Name"
-    values = ["postgres-security-group"]
+  name   = "postgres-security-group"
+  vpc_id = data.aws_vpc.selected.id
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -41,9 +45,9 @@ resource "aws_db_subnet_group" "paciente" {
 
 resource "aws_db_instance" "paciente" {
   identifier             = "paciente"
-  name                   = "paciente"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
+  name                   = "paciente"
   engine                 = "postgres"
   engine_version         = "14.11"
   username               = "postgres"
@@ -51,7 +55,8 @@ resource "aws_db_instance" "paciente" {
   publicly_accessible    = true
   skip_final_snapshot    = true
   db_subnet_group_name   = aws_db_subnet_group.paciente.name
-  vpc_security_group_ids = [data.aws_security_group.instance.id]
+  vpc_security_group_ids = [aws_security_group.instance.id]
+
   tags = {
     Name = "PacientePostgresDB"
   }
