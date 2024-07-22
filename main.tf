@@ -42,7 +42,7 @@ resource "aws_db_instance" "paciente" {
   vpc_security_group_ids = [aws_security_group.instance.id]
   # subnet_id              = data.aws_subnet.selected.id
 
-  db_name = "paciente"
+  #db_name = "paciente"
 
   tags = {
     Name = "PacientePostgresDB"
