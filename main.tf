@@ -29,7 +29,7 @@ resource "aws_db_instance" "paciente" {
   skip_final_snapshot = true
 
   vpc_security_group_ids = [data.aws_security_group.selected.id]
-  db_subnet_group_name   = aws_db_subnet_group.paciente.name
+  db_subnet_group_name   = "postech-vpc"
 
   tags = {
     Name = "PacientePostgresDB"
