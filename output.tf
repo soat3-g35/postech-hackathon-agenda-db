@@ -3,18 +3,18 @@
 
 output "rds_hostname" {
   description = "RDS instance hostname"
-  value       = aws_db_instance.paciente.address
+  value       = aws_db_instance.agenda.address
   sensitive   = true
 }
 
 output "rds_port" {
   description = "RDS instance port"
-  value       = aws_db_instance.paciente.port
+  value       = aws_db_instance.agenda.port
   sensitive   = true
 }
 
 output "rds_username" {
   description = "RDS instance root username"
-  value       = aws_db_instance.paciente.username
+  value       = aws_db_instance.agenda.username
   sensitive   = true
 }
