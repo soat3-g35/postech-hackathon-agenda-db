@@ -31,18 +31,18 @@ data "aws_security_group" "sg" {
   }
 }
 
-resource "aws_db_subnet_group" "paciente" {
-  name       = "paciente"
+resource "aws_db_subnet_group" "agenda" {
+  name       = "agenda"
   subnet_ids = data.aws_subnet_ids.example.ids
 
   tags = {
-    Name = "Paciente"
+    Name = "agenda"
   }
 }
 
-resource "aws_db_instance" "paciente" {
-  identifier             = "paciente"
-  name                   = "paciente"
+resource "aws_db_instance" "agenda" {
+  identifier             = "agenda"
+  name                   = "agenda"
   instance_class         = "db.t3.micro"
   allocated_storage      = 5
   engine                 = "postgres"
@@ -51,9 +51,9 @@ resource "aws_db_instance" "paciente" {
   password               = "postgres"
   publicly_accessible    = true
   skip_final_snapshot    = true
-  db_subnet_group_name   = aws_db_subnet_group.paciente.name
+  db_subnet_group_name   = aws_db_subnet_group.agenda.name
   vpc_security_group_ids = [data.aws_security_group.sg.id]
   tags = {
-    Name = "PacientePostgresDB"
+    Name = "agendaPostgresDB"
   }
 }
