@@ -6,7 +6,7 @@ terraform {
   cloud {
     organization = "DevopsFiapSoat3-G35"
     workspaces {
-      name = "postech-hackathon-paciente-db"
+      name = "postech-hackathon-agenda-db"
     }
   }
 
